@@ -11,25 +11,25 @@ const team = [
     name: "Elena Voss",
     role: "Founder & Principal Designer",
     bio: "With over 15 years of experience, Elena leads every project with a keen eye for detail and a passion for timeless design.",
-    image: "/images/team-elena.svg",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80&auto=format",
   },
   {
     name: "Marcus Webb",
     role: "Senior Designer",
     bio: "Marcus brings architectural precision and creative flair to residential and commercial projects alike.",
-    image: "/images/team-marcus.svg",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80&auto=format",
   },
   {
     name: "Sophia Laurent",
     role: "Interior Architect",
     bio: "Sophia specializes in spatial planning and materiality, ensuring every design is as functional as it is beautiful.",
-    image: "/images/team-sophia.svg",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&q=80&auto=format",
   },
   {
     name: "James Okafor",
     role: "Project Manager",
     bio: "James keeps every project on track, coordinating seamlessly between clients, designers, and craftspeople.",
-    image: "/images/team-james.svg",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80&auto=format",
   },
 ];
 

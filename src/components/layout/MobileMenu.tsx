@@ -16,10 +16,10 @@ export function MobileMenu({ onClose }: MobileMenuProps) {
       initial="closed"
       animate="open"
       exit="closed"
-      className="fixed inset-0 z-30 flex flex-col items-center justify-center bg-background/98 backdrop-blur-lg lg:hidden"
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-dark/98 backdrop-blur-xl lg:hidden"
     >
       <nav>
-        <ul className="flex flex-col items-center gap-8">
+        <ul className="flex flex-col items-center gap-10">
           {NAV_LINKS.map((link, index) => (
             <motion.li
               key={link.href}
@@ -32,7 +32,7 @@ export function MobileMenu({ onClose }: MobileMenuProps) {
               <Link
                 href={link.href}
                 onClick={onClose}
-                className="font-heading text-3xl font-semibold text-dark transition-colors hover:text-primary"
+                className="font-heading text-4xl font-light tracking-wide text-text-light/90 transition-colors duration-300 hover:text-primary"
               >
                 {link.label}
               </Link>

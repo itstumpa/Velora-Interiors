@@ -1,7 +1,6 @@
 "use client";
 
 import { Logo } from "@/components/common/Logo";
-import { navVariants } from "@/lib/animations";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
@@ -12,60 +11,45 @@ import { MobileMenu } from "./MobileMenu";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [scrollDirection, setScrollDirection] = useState<"up" | "down">("up");
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 50);
-      setScrollDirection(
-        currentScrollY > lastScrollY && currentScrollY > 100 ? "down" : "up",
-      );
-      setLastScrollY(currentScrollY);
+      setIsScrolled(window.scrollY > 60);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   useEffect(() => {
-    if (isMobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isMobileOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
   }, [isMobileOpen]);
 
-  const closeMobile = () => setIsMobileOpen(false);
-
   return (
     <>
       <motion.header
-        variants={navVariants}
-        animate={
-          scrollDirection === "down" && isScrolled ? "hidden" : "visible"
-        }
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
-          "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
+          "fixed inset-x-0 top-0 z-50 border-b border-primary/20 transition-all duration-500",
           isScrolled
-            ? "bg-background/95 shadow-sm backdrop-blur-md"
-            : "bg-transparent",
+            ? "bg-dark/85 shadow-[0_1px_20px_rgba(0,0,0,0.15)] backdrop-blur-xl border-primary/30"
+            : "bg-transparent border-primary/15",
         )}
       >
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-          <Logo variant={isScrolled ? "dark" : "dark"} />
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+          <Logo variant="light" />
 
           {/* Desktop Navigation */}
-          <ul className="hidden items-center gap-8 lg:flex">
+          <ul className="hidden items-center gap-10 lg:flex">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="font-body text-sm font-medium uppercase tracking-wider text-text-secondary transition-colors hover:text-primary"
+                  className="font-body text-[11px] font-light uppercase tracking-[0.28em] text-text-light/85 transition-colors duration-300 hover:text-primary"
                 >
                   {link.label}
                 </Link>
@@ -84,24 +68,24 @@ export function Navbar() {
               animate={
                 isMobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
               }
-              className="block h-0.5 w-6 bg-dark transition-colors"
+              className="block h-[1.5px] w-6 bg-text-light transition-colors"
             />
             <motion.span
               animate={isMobileOpen ? { opacity: 0 } : { opacity: 1 }}
-              className="block h-0.5 w-6 bg-dark transition-colors"
+              className="block h-[1.5px] w-6 bg-text-light transition-colors"
             />
             <motion.span
               animate={
                 isMobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
               }
-              className="block h-0.5 w-6 bg-dark transition-colors"
+              className="block h-[1.5px] w-6 bg-text-light transition-colors"
             />
           </button>
         </nav>
       </motion.header>
 
       <AnimatePresence>
-        {isMobileOpen && <MobileMenu onClose={closeMobile} />}
+        {isMobileOpen && <MobileMenu onClose={() => setIsMobileOpen(false)} />}
       </AnimatePresence>
     </>
   );

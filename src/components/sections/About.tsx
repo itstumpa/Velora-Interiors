@@ -4,6 +4,7 @@ import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { fadeInLeft, fadeInRight } from "@/lib/animations";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export function About() {
   return (
@@ -21,9 +22,18 @@ export function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="relative aspect-4/5 bg-background-alt"
+            className="relative aspect-4/5"
           >
             <div className="absolute -bottom-4 -right-4 h-full w-full border-2 border-primary" />
+            <div className="relative h-full w-full">
+              <Image
+                src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=800&q=80&auto=format"
+                alt="Velora Interiors design studio"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+            </div>
           </motion.div>
 
           <motion.div
