@@ -1,10 +1,9 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { motion } from "framer-motion";
 
 const team = [
   {

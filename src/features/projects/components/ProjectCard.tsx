@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Image from "next/image";
 import type { Project } from "../types";
 
 interface ProjectCardProps {
@@ -56,10 +55,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
         </h3>
         <div className="mt-2 flex flex-wrap gap-2">
           {project.tags.slice(0, 3).map((tag) => (
-            <span
-              key={tag}
-              className="font-body text-xs text-text-secondary"
-            >
+            <span key={tag} className="font-body text-xs text-text-secondary">
               {tag}
             </span>
           ))}

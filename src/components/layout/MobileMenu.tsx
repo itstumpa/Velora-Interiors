@@ -1,9 +1,9 @@
 "use client";
 
+import { mobileLinkVariants, mobileMenuVariants } from "@/lib/animations";
+import { NAV_LINKS } from "@/lib/constants";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { NAV_LINKS } from "@/lib/constants";
-import { mobileMenuVariants, mobileLinkVariants } from "@/lib/animations";
 
 interface MobileMenuProps {
   onClose: () => void;

@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Container } from "@/components/common/Container";
 import { Button } from "@/components/common/Button";
-import { fadeInUp, fadeInLeft, fadeInRight } from "@/lib/animations";
+import { Container } from "@/components/common/Container";
+import { fadeInRight, fadeInUp } from "@/lib/animations";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -41,8 +41,7 @@ export function Hero() {
               variants={fadeInUp}
               className="font-heading text-4xl font-bold leading-tight text-dark md:text-5xl lg:text-6xl"
             >
-              Where Vision{" "}
-              <span className="text-primary">Meets Space</span>
+              Where Vision <span className="text-primary">Meets Space</span>
             </motion.h1>
 
             <motion.p

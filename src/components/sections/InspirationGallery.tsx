@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 // Gallery categories
 const categories = [
@@ -16,14 +15,54 @@ const categories = [
 ];
 
 const galleryImages = [
-  { id: 1, src: "/images/gallery-1.jpg", alt: "Living room design", category: "living" },
-  { id: 2, src: "/images/gallery-2.jpg", alt: "Bedroom interior", category: "bedroom" },
-  { id: 3, src: "/images/gallery-3.jpg", alt: "Kitchen renovation", category: "kitchen" },
-  { id: 4, src: "/images/gallery-4.jpg", alt: "Bathroom spa", category: "bathroom" },
-  { id: 5, src: "/images/gallery-5.jpg", alt: "Open concept living", category: "living" },
-  { id: 6, src: "/images/gallery-6.jpg", alt: "Master bedroom", category: "bedroom" },
-  { id: 7, src: "/images/gallery-7.jpg", alt: "Modern kitchen", category: "kitchen" },
-  { id: 8, src: "/images/gallery-8.jpg", alt: "Luxury bathroom", category: "bathroom" },
+  {
+    id: 1,
+    src: "/images/gallery-1.jpg",
+    alt: "Living room design",
+    category: "living",
+  },
+  {
+    id: 2,
+    src: "/images/gallery-2.jpg",
+    alt: "Bedroom interior",
+    category: "bedroom",
+  },
+  {
+    id: 3,
+    src: "/images/gallery-3.jpg",
+    alt: "Kitchen renovation",
+    category: "kitchen",
+  },
+  {
+    id: 4,
+    src: "/images/gallery-4.jpg",
+    alt: "Bathroom spa",
+    category: "bathroom",
+  },
+  {
+    id: 5,
+    src: "/images/gallery-5.jpg",
+    alt: "Open concept living",
+    category: "living",
+  },
+  {
+    id: 6,
+    src: "/images/gallery-6.jpg",
+    alt: "Master bedroom",
+    category: "bedroom",
+  },
+  {
+    id: 7,
+    src: "/images/gallery-7.jpg",
+    alt: "Modern kitchen",
+    category: "kitchen",
+  },
+  {
+    id: 8,
+    src: "/images/gallery-8.jpg",
+    alt: "Luxury bathroom",
+    category: "bathroom",
+  },
 ];
 
 export function InspirationGallery() {
@@ -110,8 +149,18 @@ export function InspirationGallery() {
                 className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-dark/50 text-white transition-colors hover:bg-dark/80"
                 aria-label="Close"
               >
-                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </motion.div>

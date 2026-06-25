@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useCallback, useRef, useState } from "react";
 import type { BeforeAfterProject } from "../types";
 
 interface ComparisonSliderProps {
@@ -16,16 +16,13 @@ export function ComparisonSlider({ project, index }: ComparisonSliderProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState(50);
 
-  const updatePosition = useCallback(
-    (clientX: number) => {
-      const rect = containerRef.current?.getBoundingClientRect();
-      if (!rect) return;
-      const x = clientX - rect.left;
-      const percentage = (x / rect.width) * 100;
-      setPosition(Math.min(Math.max(percentage, 5), 95));
-    },
-    [],
-  );
+  const updatePosition = useCallback((clientX: number) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = clientX - rect.left;
+    const percentage = (x / rect.width) * 100;
+    setPosition(Math.min(Math.max(percentage, 5), 95));
+  }, []);
 
   const handleMouseDown = () => setIsDragging(true);
   const handleMouseUp = () => setIsDragging(false);

@@ -1,10 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Button } from "@/components/common/Button";
-import { useContactForm } from "../hooks/useContactForm";
-import { cn } from "@/lib/utils";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import { useContactForm } from "../hooks/useContactForm";
 
 const projectTypes = [
   { value: "", label: "Select project type" },
@@ -36,7 +36,10 @@ export function ContactForm() {
       noValidate
     >
       <motion.div variants={fadeInUp}>
-        <label htmlFor="name" className="mb-1 block font-body text-sm font-medium text-dark">
+        <label
+          htmlFor="name"
+          className="mb-1 block font-body text-sm font-medium text-dark"
+        >
           Name <span className="text-error">*</span>
         </label>
         <input
@@ -54,7 +57,10 @@ export function ContactForm() {
 
       <motion.div variants={fadeInUp} className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="email" className="mb-1 block font-body text-sm font-medium text-dark">
+          <label
+            htmlFor="email"
+            className="mb-1 block font-body text-sm font-medium text-dark"
+          >
             Email <span className="text-error">*</span>
           </label>
           <input
@@ -70,7 +76,10 @@ export function ContactForm() {
           )}
         </div>
         <div>
-          <label htmlFor="phone" className="mb-1 block font-body text-sm font-medium text-dark">
+          <label
+            htmlFor="phone"
+            className="mb-1 block font-body text-sm font-medium text-dark"
+          >
             Phone
           </label>
           <input
@@ -88,7 +97,10 @@ export function ContactForm() {
       </motion.div>
 
       <motion.div variants={fadeInUp}>
-        <label htmlFor="projectType" className="mb-1 block font-body text-sm font-medium text-dark">
+        <label
+          htmlFor="projectType"
+          className="mb-1 block font-body text-sm font-medium text-dark"
+        >
           Project Type
         </label>
         <select
@@ -106,7 +118,10 @@ export function ContactForm() {
       </motion.div>
 
       <motion.div variants={fadeInUp}>
-        <label htmlFor="message" className="mb-1 block font-body text-sm font-medium text-dark">
+        <label
+          htmlFor="message"
+          className="mb-1 block font-body text-sm font-medium text-dark"
+        >
           Message <span className="text-error">*</span>
         </label>
         <textarea
@@ -114,13 +129,15 @@ export function ContactForm() {
           rows={5}
           value={formData.message}
           onChange={(e) => updateField("message", e.target.value)}
-          className={cn(inputClasses, "resize-y", errors.message && "border-error")}
+          className={cn(
+            inputClasses,
+            "resize-y",
+            errors.message && "border-error",
+          )}
           placeholder="Tell us about your project..."
         />
         {errors.message && (
-          <p className="mt-1 font-body text-xs text-error">
-            {errors.message}
-          </p>
+          <p className="mt-1 font-body text-xs text-error">{errors.message}</p>
         )}
       </motion.div>
 

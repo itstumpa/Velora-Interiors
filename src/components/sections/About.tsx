@@ -1,9 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { fadeInLeft, fadeInRight } from "@/lib/animations";
+import { motion } from "framer-motion";
 
 export function About() {
   return (
@@ -40,10 +40,10 @@ export function About() {
             <div className="mt-6 space-y-4 font-body text-base leading-relaxed text-text-secondary">
               <p>
                 Velora Interiors was founded on a simple belief: great design
-                transforms how we live, work, and feel. Over the past decade
-                and a half, we&apos;ve grown from a small studio into a
-                celebrated interior design firm with projects spanning
-                residential, commercial, hospitality, and retail sectors.
+                transforms how we live, work, and feel. Over the past decade and
+                a half, we&apos;ve grown from a small studio into a celebrated
+                interior design firm with projects spanning residential,
+                commercial, hospitality, and retail sectors.
               </p>
               <p>
                 Our approach is deeply collaborative. We listen intently,

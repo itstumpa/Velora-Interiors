@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
-import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 
 const faqs = [
   {
@@ -57,10 +56,7 @@ export function FAQSection() {
 
         <div className="mx-auto mt-12 max-w-3xl md:mt-16">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border-b border-border last:border-0"
-            >
+            <div key={index} className="border-b border-border last:border-0">
               <button
                 onClick={() => toggle(index)}
                 className="flex w-full items-center justify-between py-5 text-left transition-colors hover:text-primary"

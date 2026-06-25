@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { NAV_LINKS } from "@/lib/constants";
-import { navVariants } from "@/lib/animations";
 import { Logo } from "@/components/common/Logo";
+import { navVariants } from "@/lib/animations";
+import { NAV_LINKS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
@@ -46,7 +46,9 @@ export function Navbar() {
     <>
       <motion.header
         variants={navVariants}
-        animate={scrollDirection === "down" && isScrolled ? "hidden" : "visible"}
+        animate={
+          scrollDirection === "down" && isScrolled ? "hidden" : "visible"
+        }
         className={cn(
           "fixed inset-x-0 top-0 z-40 transition-colors duration-300",
           isScrolled
@@ -79,7 +81,9 @@ export function Navbar() {
             aria-expanded={isMobileOpen}
           >
             <motion.span
-              animate={isMobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
+              animate={
+                isMobileOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }
+              }
               className="block h-0.5 w-6 bg-dark transition-colors"
             />
             <motion.span
@@ -87,7 +91,9 @@ export function Navbar() {
               className="block h-0.5 w-6 bg-dark transition-colors"
             />
             <motion.span
-              animate={isMobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
+              animate={
+                isMobileOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }
+              }
               className="block h-0.5 w-6 bg-dark transition-colors"
             />
           </button>

@@ -1,10 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { useCountUp } from "@/hooks/useCountUp";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const statsData = [
   { value: 15, suffix: "+", label: "Years Experience" },
@@ -29,11 +29,7 @@ function StatCard({
   const count = useCountUp({ end: value, duration: 2000, enabled: isInView });
 
   return (
-    <motion.div
-      ref={ref}
-      variants={fadeInUp}
-      className="text-center"
-    >
+    <motion.div ref={ref} variants={fadeInUp} className="text-center">
       <span className="font-heading text-4xl font-bold text-primary md:text-5xl lg:text-6xl">
         {count}
         {suffix}

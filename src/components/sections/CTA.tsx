@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Container } from "@/components/common/Container";
 import { Button } from "@/components/common/Button";
+import { Container } from "@/components/common/Container";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import { motion } from "framer-motion";
+import Link from "next/link";
 
 export function CTA() {
   return (
@@ -34,8 +34,8 @@ export function CTA() {
             className="mt-4 text-base leading-relaxed text-gray-400 md:text-lg"
           >
             Let&apos;s create something extraordinary together. Book your
-            complimentary consultation today and take the first step toward
-            the space you&apos;ve always dreamed of.
+            complimentary consultation today and take the first step toward the
+            space you&apos;ve always dreamed of.
           </motion.p>
           <motion.div variants={fadeInUp} className="mt-8">
             <Link href="/#contact">

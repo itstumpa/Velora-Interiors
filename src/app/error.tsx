@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import { Button } from "@/components/common/Button";
+import { useEffect } from "react";
 
 interface ErrorProps {
   error: Error & { digest?: string };
@@ -27,10 +27,7 @@ export default function Error({ error, reset }: ErrorProps) {
       </p>
       <div className="mt-8 flex gap-4">
         <Button onClick={reset}>Try Again</Button>
-        <Button
-          variant="outline"
-          onClick={() => (window.location.href = "/")}
-        >
+        <Button variant="outline" onClick={() => (window.location.href = "/")}>
           Go Home
         </Button>
       </div>

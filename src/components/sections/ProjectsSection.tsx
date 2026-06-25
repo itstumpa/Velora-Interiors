@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { ProjectCard } from "@/features/projects/components/ProjectCard";
 import { ProjectFilter } from "@/features/projects/components/ProjectFilter";
 import { projects } from "@/features/projects/data";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 export function ProjectsSection() {
   const [activeCategory, setActiveCategory] = useState("all");
@@ -36,11 +36,7 @@ export function ProjectsSection() {
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-              />
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
         </AnimatePresence>
