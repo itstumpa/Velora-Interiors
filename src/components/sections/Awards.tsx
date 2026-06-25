@@ -57,7 +57,7 @@ export function Awards() {
               variants={fadeInUp}
               className="flex items-center gap-4 border-b border-border py-5 last:border-0"
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 font-heading text-sm font-bold text-primary">
+              <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary/10 font-heading text-sm font-bold text-primary">
                 {award.year.toString().slice(-2)}
               </span>
               <div className="flex-1">

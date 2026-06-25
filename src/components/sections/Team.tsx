@@ -4,31 +4,32 @@ import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const team = [
   {
     name: "Elena Voss",
     role: "Founder & Principal Designer",
     bio: "With over 15 years of experience, Elena leads every project with a keen eye for detail and a passion for timeless design.",
-    image: "/images/team-elena.jpg",
+    image: "/images/team-elena.svg",
   },
   {
     name: "Marcus Webb",
     role: "Senior Designer",
     bio: "Marcus brings architectural precision and creative flair to residential and commercial projects alike.",
-    image: "/images/team-marcus.jpg",
+    image: "/images/team-marcus.svg",
   },
   {
     name: "Sophia Laurent",
     role: "Interior Architect",
     bio: "Sophia specializes in spatial planning and materiality, ensuring every design is as functional as it is beautiful.",
-    image: "/images/team-sophia.jpg",
+    image: "/images/team-sophia.svg",
   },
   {
     name: "James Okafor",
     role: "Project Manager",
     bio: "James keeps every project on track, coordinating seamlessly between clients, designers, and craftspeople.",
-    image: "/images/team-james.jpg",
+    image: "/images/team-james.svg",
   },
 ];
 
@@ -55,8 +56,14 @@ export function Team() {
               variants={fadeInUp}
               className="group text-center"
             >
-              <div className="relative mx-auto mb-4 h-64 w-full overflow-hidden bg-background-alt">
-                <div className="h-full w-full bg-background-alt" />
+              <div className="relative mx-auto mb-4 h-64 w-full overflow-hidden">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
               </div>
               <h3 className="font-heading text-lg font-semibold text-dark">
                 {member.name}

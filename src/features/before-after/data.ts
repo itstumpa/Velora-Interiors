@@ -6,8 +6,8 @@ export const beforeAfterProjects: BeforeAfterProject[] = [
     title: "Living Room Transformation",
     description:
       "From dated to dazzling — an open-plan living space reimagined with contemporary furnishings, layered lighting, and a refined neutral palette.",
-    beforeImage: "/images/before-after/living-before.jpg",
-    afterImage: "/images/before-after/living-after.jpg",
+    beforeImage: "/images/before-after/living-before.svg",
+    afterImage: "/images/before-after/living-after.svg",
     category: "Residential",
   },
   {
@@ -15,8 +15,8 @@ export const beforeAfterProjects: BeforeAfterProject[] = [
     title: "Kitchen Modernization",
     description:
       "A cramped, closed-off kitchen became an airy, sociable hub with custom cabinetry, marble surfaces, and state-of-the-art appliances.",
-    beforeImage: "/images/before-after/kitchen-before.jpg",
-    afterImage: "/images/before-after/kitchen-after.jpg",
+    beforeImage: "/images/before-after/kitchen-before.svg",
+    afterImage: "/images/before-after/kitchen-after.svg",
     category: "Residential",
   },
   {
@@ -24,8 +24,8 @@ export const beforeAfterProjects: BeforeAfterProject[] = [
     title: "Office Redesign",
     description:
       "A corporate lobby transformed into a welcoming, brand-forward environment with natural materials and dynamic seating zones.",
-    beforeImage: "/images/before-after/office-before.jpg",
-    afterImage: "/images/before-after/office-after.jpg",
+    beforeImage: "/images/before-after/office-before.svg",
+    afterImage: "/images/before-after/office-after.svg",
     category: "Commercial",
   },
 ];

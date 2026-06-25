@@ -3,6 +3,7 @@
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { AnimatePresence, motion } from "framer-motion";
+import Image from "next/image";
 import { useState } from "react";
 
 // Gallery categories
@@ -17,49 +18,49 @@ const categories = [
 const galleryImages = [
   {
     id: 1,
-    src: "/images/gallery-1.jpg",
+    src: "/images/gallery-1.svg",
     alt: "Living room design",
     category: "living",
   },
   {
     id: 2,
-    src: "/images/gallery-2.jpg",
+    src: "/images/gallery-2.svg",
     alt: "Bedroom interior",
     category: "bedroom",
   },
   {
     id: 3,
-    src: "/images/gallery-3.jpg",
+    src: "/images/gallery-3.svg",
     alt: "Kitchen renovation",
     category: "kitchen",
   },
   {
     id: 4,
-    src: "/images/gallery-4.jpg",
+    src: "/images/gallery-4.svg",
     alt: "Bathroom spa",
     category: "bathroom",
   },
   {
     id: 5,
-    src: "/images/gallery-5.jpg",
+    src: "/images/gallery-5.svg",
     alt: "Open concept living",
     category: "living",
   },
   {
     id: 6,
-    src: "/images/gallery-6.jpg",
+    src: "/images/gallery-6.svg",
     alt: "Master bedroom",
     category: "bedroom",
   },
   {
     id: 7,
-    src: "/images/gallery-7.jpg",
+    src: "/images/gallery-7.svg",
     alt: "Modern kitchen",
     category: "kitchen",
   },
   {
     id: 8,
-    src: "/images/gallery-8.jpg",
+    src: "/images/gallery-8.svg",
     alt: "Luxury bathroom",
     category: "bathroom",
   },
@@ -114,7 +115,7 @@ export function InspirationGallery() {
                 className="group relative aspect-square cursor-pointer overflow-hidden"
                 onClick={() => setSelectedImage(img.id)}
               >
-                <div className="h-full w-full bg-background-alt" />
+                <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
                 <div className="absolute inset-0 flex items-center justify-center bg-dark/0 transition-colors duration-300 group-hover:bg-dark/40">
                   <span className="translate-y-4 font-body text-sm font-medium text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                     View
@@ -143,7 +144,12 @@ export function InspirationGallery() {
               className="relative max-h-[80vh] max-w-3xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-4/3 w-full bg-background-alt" />
+              <div className="relative aspect-4/3 w-full">
+                {selectedImage !== null && (() => {
+                  const img = galleryImages.find((g) => g.id === selectedImage);
+                  return img ? <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(max-width: 768px) 100vw, 80vw" /> : null;
+                })()}
+              </div>
               <button
                 onClick={() => setSelectedImage(null)}
                 className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-dark/50 text-white transition-colors hover:bg-dark/80"

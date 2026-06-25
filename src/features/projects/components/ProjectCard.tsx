@@ -19,7 +19,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative overflow-hidden bg-background-alt"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-4/3 overflow-hidden">
         <Image
           src={project.image}
           alt={project.title}
@@ -68,7 +68,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
 export function ProjectCardSkeleton() {
   return (
     <div className="animate-pulse overflow-hidden bg-background-alt">
-      <div className="aspect-[4/3] bg-gray-200" />
+      <div className="aspect-4/3 bg-gray-200" />
       <div className="space-y-3 p-5">
         <div className="h-3 w-24 rounded bg-gray-200" />
         <div className="h-5 w-3/4 rounded bg-gray-200" />
