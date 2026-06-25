@@ -49,4 +49,28 @@ export const testimonials: Testimonial[] = [
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format",
     projectType: "Residential",
   },
+  {
+    id: "t5",
+    name: "Monica Patel",
+    role: "Boutique Owner",
+    location: "Austin, TX",
+    content:
+      "Velora captured the soul of our brand and translated it into a stunning retail space. Every design decision was intentional and every detail elevated the customer experience.",
+    rating: 5,
+    avatar:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80&auto=format",
+    projectType: "Retail",
+  },
+  {
+    id: "t6",
+    name: "The Harrison Family",
+    role: "Homeowners",
+    location: "Seattle, WA",
+    content:
+      "A full home renovation is daunting, but Velora guided us through every step with patience and expertise. The result is a home that feels both luxurious and deeply personal.",
+    rating: 5,
+    avatar:
+      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80&auto=format",
+    projectType: "Residential",
+  },
 ];
