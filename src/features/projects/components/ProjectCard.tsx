@@ -28,7 +28,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         {/* Overlay on hover */}
-        <div className="absolute inset-0 flex items-end bg-gradient-to-t from-dark/70 via-dark/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div className="absolute inset-0 flex items-end bg-linear-to-t from-dark/70 via-dark/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <div className="p-6">
             <span className="mb-2 inline-block rounded bg-primary/90 px-3 py-1 font-body text-xs font-medium uppercase tracking-wider text-dark">
               {project.category}
