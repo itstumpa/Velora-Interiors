@@ -105,7 +105,7 @@ export function ProcessTimeline() {
             >
               {/* Step Number & Icon */}
               <div className="z-10 mb-4 flex items-center gap-4 md:mb-0 md:w-1/2 md:justify-end">
-                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary text-dark shadow-md">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-dark shadow-md">
                   {stepIcons[step.icon]}
                 </div>
                 <div className="md:hidden">

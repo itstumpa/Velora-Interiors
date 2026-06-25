@@ -43,7 +43,7 @@ export function ComparisonSlider({ project, index }: ComparisonSliderProps) {
     >
       <div
         ref={containerRef}
-        className="relative aspect-[4/3] cursor-ew-resize overflow-hidden select-none"
+        className="relative aspect-4/3 cursor-ew-resize overflow-hidden select-none"
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}

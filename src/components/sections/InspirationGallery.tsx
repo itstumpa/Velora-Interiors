@@ -143,7 +143,7 @@ export function InspirationGallery() {
               className="relative max-h-[80vh] max-w-3xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="aspect-[4/3] w-full bg-background-alt" />
+              <div className="aspect-4/3 w-full bg-background-alt" />
               <button
                 onClick={() => setSelectedImage(null)}
                 className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-dark/50 text-white transition-colors hover:bg-dark/80"

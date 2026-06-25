@@ -21,7 +21,7 @@ export function About() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="relative aspect-[4/5] bg-background-alt"
+            className="relative aspect-4/5 bg-background-alt"
           >
             <div className="absolute -bottom-4 -right-4 h-full w-full border-2 border-primary" />
           </motion.div>

@@ -68,7 +68,7 @@ export function FAQSection() {
                 <motion.span
                   animate={{ rotate: openIndex === index ? 45 : 0 }}
                   transition={{ duration: 0.2 }}
-                  className="flex h-6 w-6 flex-shrink-0 items-center justify-center"
+                  className="flex h-6 w-6 shrink-0 items-center justify-center"
                 >
                   <svg
                     className="h-4 w-4 text-text-secondary"

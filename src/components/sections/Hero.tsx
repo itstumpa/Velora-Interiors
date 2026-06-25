@@ -11,9 +11,9 @@ export function Hero() {
     <section className="relative flex min-h-screen items-center bg-background pt-24">
       {/* Background decorative element */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full border border-primary/10" />
-        <div className="absolute -right-20 -top-20 h-[500px] w-[500px] rounded-full border border-primary/10" />
-        <div className="absolute bottom-0 left-0 h-64 w-64 bg-gradient-to-tr from-primary/5 to-transparent" />
+        <div className="absolute -right-40 -top-40 h-150 w-150 rounded-full border border-primary/10" />
+        <div className="absolute -right-20 -top-20 h-125 w-125 rounded-full border border-primary/10" />
+        <div className="absolute bottom-0 left-0 h-64 w-64 bg-linear-to-tr from-primary/5 to-transparent" />
       </div>
 
       <Container className="relative z-10">
@@ -104,7 +104,7 @@ export function Hero() {
             variants={fadeInRight}
             initial="hidden"
             animate="visible"
-            className="relative hidden aspect-[4/5] lg:block"
+            className="relative hidden aspect-4/5 lg:block"
           >
             <div className="absolute -left-4 -top-4 h-full w-full border-2 border-primary" />
             <div className="relative h-full w-full bg-background-alt" />
