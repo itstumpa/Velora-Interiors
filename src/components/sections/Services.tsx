@@ -139,7 +139,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
 
 export function Services() {
   return (
-    <section id="services" className="bg-background py-20 md:py-28">
+    <section id="services" className="bg-background py-14 md:py-18">
       <Container>
         <SectionTitle
           subtitle="What We Do"

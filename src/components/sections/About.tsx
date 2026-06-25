@@ -8,7 +8,7 @@ import Image from "next/image";
 
 export function About() {
   return (
-    <section id="about" className="bg-background-alt py-20 md:py-28">
+    <section id="about" className="bg-background-alt py-14 md:py-18">
       <Container>
         <SectionTitle
           subtitle="About Us"

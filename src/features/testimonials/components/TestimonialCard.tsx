@@ -1,5 +1,3 @@
-"use client";
-
 import { motion } from "framer-motion";
 import Image from "next/image";
 import type { Testimonial } from "../types";
@@ -15,46 +13,41 @@ export function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="flex flex-col bg-background-alt p-8 md:p-10"
+      transition={{
+        duration: 0.6,
+        delay: index * 0.1,
+        ease: [0.25, 0.1, 0.25, 1],
+      }}
+      className="group relative border-l-2 border-primary/30 pl-6 transition-colors hover:border-primary md:pl-8"
     >
-      {/* Rating Stars */}
-      <div className="mb-4 flex gap-1">
-        {Array.from({ length: testimonial.rating }).map((_, i) => (
-          <svg
-            key={i}
-            className="h-5 w-5 text-primary"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-          >
-            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-          </svg>
-        ))}
+      {/* Large decorative quote mark */}
+      <div className="pointer-events-none absolute -top-4 left-6 select-none text-[120px] font-heading leading-none text-primary/8 md:left-8 md:text-[160px]">
+        &ldquo;
       </div>
 
       {/* Quote */}
-      <blockquote className="flex-1 font-body text-base leading-relaxed text-text-secondary italic">
-        &ldquo;{testimonial.content}&rdquo;
+      <blockquote className="relative font-heading text-lg font-light leading-relaxed text-dark/85 md:text-xl">
+        {testimonial.content}
       </blockquote>
 
       {/* Author */}
-      <div className="mt-6 flex items-center gap-4">
-        <div className="relative h-14 w-14 overflow-full overflow-hidden">
+      <div className="mt-5 flex items-center gap-3">
+        <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-primary/10">
           <Image
             src={testimonial.avatar}
             alt={testimonial.name}
             fill
             className="object-cover"
-            sizes="56px"
+            sizes="40px"
           />
         </div>
         <div>
-          <cite className="not-italic font-heading text-base font-semibold text-dark">
+          <cite className="block not-italic font-heading text-sm font-semibold text-dark">
             {testimonial.name}
           </cite>
-          <p className="font-body text-sm text-text-secondary">
-            {testimonial.role} · {testimonial.location}
-          </p>
+          <span className="font-body text-xs text-text-secondary">
+            {testimonial.role} &bull; {testimonial.projectType}
+          </span>
         </div>
       </div>
     </motion.div>

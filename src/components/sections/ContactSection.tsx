@@ -6,7 +6,7 @@ import { ContactForm } from "@/features/contact/components/ContactForm";
 
 export function ContactSection() {
   return (
-    <section id="contact" className="bg-background-alt py-20 md:py-28">
+    <section id="contact" className="bg-background-alt py-14 md:py-18">
       <Container>
         <SectionTitle
           subtitle="Get in Touch"

@@ -76,7 +76,7 @@ export function InspirationGallery() {
       : galleryImages.filter((img) => img.category === activeCategory);
 
   return (
-    <section id="gallery" className="bg-background-alt py-20 md:py-28">
+    <section id="gallery" className="bg-background-alt py-14 md:py-18">
       <Container>
         <SectionTitle
           subtitle="Inspiration"
@@ -90,10 +90,10 @@ export function InspirationGallery() {
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
-              className={`rounded-none px-5 py-2.5 font-body text-sm font-medium uppercase tracking-wider transition-colors duration-300 ${
+              className={`rounded-full px-6 py-2.5 font-body text-sm font-medium uppercase tracking-wider shadow-sm transition-all duration-300 ${
                 activeCategory === cat.value
-                  ? "bg-dark text-text-light"
-                  : "bg-white text-text-secondary hover:bg-primary/20 hover:text-dark"
+                  ? "bg-dark text-text-light shadow-dark/15"
+                  : "bg-white text-text-secondary shadow-none hover:bg-primary/15 hover:text-dark"
               }`}
             >
               {cat.label}

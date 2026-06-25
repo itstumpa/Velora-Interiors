@@ -7,7 +7,7 @@ import { beforeAfterProjects } from "@/features/before-after/data";
 
 export function BeforeAfterSection() {
   return (
-    <section id="before-after" className="bg-background py-20 md:py-28">
+    <section id="before-after" className="bg-background py-14 md:py-18">
       <Container>
         <SectionTitle
           subtitle="Transformations"

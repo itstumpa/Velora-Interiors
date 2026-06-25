@@ -98,8 +98,9 @@ export function Hero() {
           <motion.div variants={heroChild} className="mt-10">
             <Link href="/#contact">
               <Button
+                variant="outline"
                 size="lg"
-                className="border border-primary/30 bg-primary/10 px-10 py-4 text-xs uppercase tracking-[0.25em] text-text-light backdrop-blur-sm transition-all duration-500 hover:bg-primary hover:text-dark"
+                className="uppercase tracking-[0.25em] text-text-light backdrop-blur-sm hover:bg-primary hover:text-dark"
               >
                 Begin Your Journey
               </Button>

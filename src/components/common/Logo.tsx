@@ -17,7 +17,7 @@ export function Logo({ variant = "dark", className, href = "/" }: LogoProps) {
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 400, damping: 20 }}
         className={cn(
-          "font-heading text-2xl font-bold tracking-tight md:text-3xl",
+          "font-heading text-3xl font-bold tracking-tight md:text-4xl",
           variant === "dark" ? "text-dark" : "text-text-light",
         )}
       >

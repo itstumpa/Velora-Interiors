@@ -22,10 +22,10 @@ export function ProjectFilter({
           whileTap={{ scale: 0.98 }}
           onClick={() => onCategoryChange(category.value)}
           className={cn(
-            "rounded-none px-5 py-2.5 font-body text-sm font-medium uppercase tracking-wider transition-colors duration-300",
+            "rounded-full px-6 py-2.5 font-body text-sm font-medium uppercase tracking-wider shadow-sm transition-all duration-300",
             activeCategory === category.value
-              ? "bg-dark text-text-light"
-              : "bg-background-alt text-text-secondary hover:bg-primary/20 hover:text-dark",
+              ? "bg-dark text-text-light shadow-dark/15"
+              : "bg-white text-text-secondary shadow-none hover:bg-primary/15 hover:text-dark",
           )}
         >
           {category.label}

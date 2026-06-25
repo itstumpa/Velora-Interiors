@@ -17,7 +17,7 @@ export function ProjectsSection() {
       : projects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" className="bg-background-alt py-20 md:py-28">
+    <section id="projects" className="bg-background-alt py-14 md:py-18">
       <Container>
         <SectionTitle
           subtitle="Our Portfolio"
