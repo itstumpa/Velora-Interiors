@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/common/Button";
 import { Container } from "@/components/common/Container";
-import { heroChild, heroChildShort, heroContainer } from "@/lib/animations";
+import { heroChild, heroContainer } from "@/lib/animations";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -70,8 +70,6 @@ export function Hero() {
           animate="visible"
           className="max-w-2xl"
         >
-
-
           {/* Editorial Headline */}
           <motion.h1
             variants={heroChild}
@@ -81,7 +79,7 @@ export function Hero() {
             <br />
             <span className="text-primary">LUXURY</span>
             <br />
-             SPACES
+            SPACES
           </motion.h1>
 
           {/* Description */}

@@ -68,14 +68,15 @@ export function CTA() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
+            transition={{
+              duration: 0.7,
+              delay: 0.15,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
             className="flex shrink-0 flex-col gap-3 sm:flex-row"
           >
             <Link href="/#contact">
-              <Button
-                size="md"
-                className="uppercase tracking-[0.25em]"
-              >
+              <Button size="md" className="uppercase tracking-[0.25em]">
                 Book a Consultation
               </Button>
             </Link>

@@ -1,15 +1,52 @@
 "use client";
 
+import { useActiveSection } from "@/hooks/useActiveSection";
 import { mobileLinkVariants, mobileMenuVariants } from "@/lib/animations";
 import { NAV_LINKS } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useCallback } from "react";
 
 interface MobileMenuProps {
   onClose: () => void;
 }
 
 export function MobileMenu({ onClose }: MobileMenuProps) {
+  const sectionIds = NAV_LINKS.filter((l) => l.href.startsWith("/#")).map((l) =>
+    l.href.replace("/#", ""),
+  );
+  const activeId = useActiveSection(sectionIds);
+
+  const isActive = useCallback(
+    (href: string) => {
+      if (href === "/") return activeId === "";
+      const section = href.replace("/#", "");
+      return activeId === section;
+    },
+    [activeId],
+  );
+
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      onClose();
+      if (href === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.history.pushState(null, "", "/");
+      } else {
+        const id = href.replace("/#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
+      }
+    },
+    [onClose],
+  );
+
   return (
     <motion.div
       variants={mobileMenuVariants}
@@ -31,8 +68,11 @@ export function MobileMenu({ onClose }: MobileMenuProps) {
             >
               <Link
                 href={link.href}
-                onClick={onClose}
-                className="font-heading text-4xl font-light tracking-wide text-text-light/90 transition-colors duration-300 hover:text-primary"
+                onClick={(e) => handleClick(e, link.href)}
+                className={cn(
+                  "font-heading text-4xl font-light tracking-wide transition-colors duration-300 hover:text-primary",
+                  isActive(link.href) ? "text-primary" : "text-text-light/90",
+                )}
               >
                 {link.label}
               </Link>

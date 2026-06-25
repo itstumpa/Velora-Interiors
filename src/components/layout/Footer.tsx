@@ -134,7 +134,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <motion.div
           variants={fadeInUp}
-          className="mt-12 border-t border-gray-800 pt-8 text-center text-sm text-gray-500"
+          className="mt-12 border-t border-primary/10 pt-8 text-center text-sm text-gray-500"
         >
           <p>
             &copy; {new Date().getFullYear()} Velora Interiors. All rights

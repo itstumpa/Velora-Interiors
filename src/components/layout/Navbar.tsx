@@ -1,16 +1,23 @@
 "use client";
 
 import { Logo } from "@/components/common/Logo";
+import { useActiveSection } from "@/hooks/useActiveSection";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  // Section IDs to observe (skip Home which has no hash)
+  const sectionIds = NAV_LINKS.filter((l) => l.href.startsWith("/#")).map((l) =>
+    l.href.replace("/#", ""),
+  );
+  const activeId = useActiveSection(sectionIds);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +33,35 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMobileOpen]);
+
+  const isActive = useCallback(
+    (href: string) => {
+      if (href === "/") return activeId === "";
+      const section = href.replace("/#", "");
+      return activeId === section;
+    },
+    [activeId],
+  );
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (href === "/") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.history.pushState(null, "", "/");
+      } else {
+        const id = href.replace("/#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
+      }
+      setIsMobileOpen(false);
+    },
+    [],
+  );
 
   return (
     <>
@@ -49,7 +85,13 @@ export function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="font-body text-[15px] font-light uppercase tracking-[0.28em] text-text-light/85 transition-colors duration-300 hover:text-primary"
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={cn(
+                    "font-body text-[15px] font-light uppercase tracking-[0.28em] transition-colors duration-300",
+                    isActive(link.href)
+                      ? "text-primary"
+                      : "text-text-light/85 hover:text-primary",
+                  )}
                 >
                   {link.label}
                 </Link>
