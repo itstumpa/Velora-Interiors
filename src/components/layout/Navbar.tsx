@@ -66,9 +66,9 @@ export function Navbar() {
   return (
     <>
       <motion.header
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b border-primary/20 transition-all duration-500",
           isScrolled
@@ -77,12 +77,32 @@ export function Navbar() {
         )}
       >
         <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-          <Logo variant="light" />
+          {/* Logo — fade in with micro upward drift */}
+          <motion.div
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.06,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            <Logo variant="light" />
+          </motion.div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation — staggered sequential reveal */}
           <ul className="hidden items-center gap-10 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
+            {NAV_LINKS.map((link, i) => (
+              <motion.li
+                key={link.href}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.15 + i * 0.06,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
+              >
                 <Link
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
@@ -95,12 +115,19 @@ export function Navbar() {
                 >
                   {link.label}
                 </Link>
-              </li>
+              </motion.li>
             ))}
           </ul>
 
-          {/* Mobile Menu Button */}
-          <button
+          {/* Mobile Menu Button — staggered with last link */}
+          <motion.button
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.4,
+              delay: 0.15 + NAV_LINKS.length * 0.06,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
             onClick={() => setIsMobileOpen(!isMobileOpen)}
             className="flex flex-col gap-1.5 lg:hidden"
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
@@ -122,7 +149,7 @@ export function Navbar() {
               }
               className="block h-[1.5px] w-6 bg-text-light transition-colors"
             />
-          </button>
+          </motion.button>
         </nav>
       </motion.header>
 

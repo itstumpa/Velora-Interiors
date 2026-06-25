@@ -107,19 +107,31 @@ function ButtonInner(
 
       <span className="relative">{children}</span>
 
-      {!isLoading && !icon && iconPosition !== "left" && (
-        <span className="inline-flex transition-transform duration-300 group-hover:translate-x-0.5">
+      {!isLoading && !icon && (
+        <span className="inline-flex transition-transform duration-500 group-hover:translate-x-1">
           <svg
-            width="14"
-            height="14"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true"
           >
-            <path d="M5 12h14M12 5l7 7-7 7" />
+            {/* Long stem */}
+            <path
+              d="M3 12h16"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            {/* Arrowhead */}
+            <path
+              d="M14 5.5L19.5 12L14 18.5"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </span>
       )}
