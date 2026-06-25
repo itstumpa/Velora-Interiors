@@ -14,7 +14,7 @@ const totalPages = Math.ceil(testimonials.length / CARDS_PER_PAGE);
 export function TestimonialsSection() {
   const [page, setPage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval>>();
+  const intervalRef = useRef<ReturnType<typeof setInterval>>(undefined);
 
   const start = page * CARDS_PER_PAGE;
   const visible = testimonials.slice(start, start + CARDS_PER_PAGE);
