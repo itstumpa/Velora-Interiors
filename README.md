@@ -2,7 +2,7 @@
 
 A premium luxury interior design studio website built with **Next.js 16** (App Router), **Tailwind CSS v4**, **Framer Motion**, and **Sanity CMS** as the headless content backend. All content is managed via Sanity Studio and fetched at build time.
 
-**Live Studio:** [https://velora-interiors-cms.sanity.studio/](https://velora-interiors-cms.sanity.studio/)
+**Live Studio:** [https://velora-interiors.vercel.app/](https://velora-interiors.vercel.app/)
 
 ## Tech Stack
 
@@ -15,25 +15,12 @@ A premium luxury interior design studio website built with **Next.js 16** (App R
 | **Sanity CMS**            | Headless content management (schemas, GROQ queries)     |
 | **next-sanity**           | Sanity client + toolkit for Next.js                     |
 | **@portabletext/react**   | Render rich text (Portable Text) content                |
+| **Nodemailer**            | Email delivery for contact form submissions             |
 | **clsx + tailwind-merge** | Conditional class composition (`cn()` utility)          |
 
 **Fonts:** Playfair Display (headings) · Inter (body) — loaded via `next/font/google`.
 
 ## Design System
-
-### Brand Colors
-
-| Token            | Hex                        |
-| ---------------- | -------------------------- |
-| `primary`        | `#C9B79C` — warm beige     |
-| `primary-light`  | `#DFD0B8`                  |
-| `primary-dark`   | `#A89276`                  |
-| `dark`           | `#1F1F1F` — charcoal       |
-| `dark-secondary` | `#2D2D2D`                  |
-| `background`     | `#FAF7F2` — warm off-white |
-| `background-alt` | `#F5F0E8`                  |
-| `text-light`     | `#FAF7F2`                  |
-| `text-secondary` | `#6B6B6B`                  |
 
 ### Key Components
 
@@ -70,7 +57,9 @@ src/
 │   ├── not-found.tsx       # Custom 404 page
 │   ├── globals.css         # Tailwind v4 @theme design tokens
 │   ├── loading.tsx         # Suspense fallback
-│   └── error.tsx           # Error boundary
+│   ├── error.tsx           # Error boundary
+│   └── api/
+│       └── contact/        # POST endpoint — sends inquiry emails via Nodemailer
 │
 ├── sanity/                 # Sanity CMS integration
 │   ├── client.ts           # Sanity client config
@@ -111,11 +100,23 @@ src/
 - Node.js 20+
 - A `.env.local` file with your Sanity credentials (copy from `.env.example` if available):
 
-```env
+# Sanity
+
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
 NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
-```
+
+# Email (Nodemailer via Gmail SMTP — for contact form)
+
+EMAIL_HOST=smtp.gmail.com
+EMAIL_PORT=587
+EMAIL_USER=your-email@gmail.com
+EMAIL_PASS=your-gmail-app-password
+EMAIL_FROM="Velora Interiors"t_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+
+````
 
 ### Commands
 
@@ -134,7 +135,9 @@ npm start
 
 # Lint
 npm run lint
-```
+````
+
+- **Contact form with Nodemailer** — The contact form submits to `/api/contact`, which sends beautifully styled HTML emails via Gmail SMTP. Emails include sender details (name, email, phone, project type) and the message, with `replyTo` set to the sender so you can reply directly.
 
 Open [http://localhost:3000](http://localhost:3000) to view the site.
 
