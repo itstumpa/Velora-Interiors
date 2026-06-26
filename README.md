@@ -1,6 +1,8 @@
 # Velora Interiors — Frontend
 
-A premium luxury interior design studio website built with **Next.js 16** (App Router), **Tailwind CSS v4**, and **Framer Motion**. This project showcases a full-service interior design brand with a sophisticated, editorial visual language.
+A premium luxury interior design studio website built with **Next.js 16** (App Router), **Tailwind CSS v4**, **Framer Motion**, and **Sanity CMS** as the headless content backend. All content is managed via Sanity Studio and fetched at build time.
+
+**Live Studio:** [https://velora-interiors-cms.sanity.studio/](https://velora-interiors-cms.sanity.studio/)
 
 ## Tech Stack
 
@@ -10,6 +12,9 @@ A premium luxury interior design studio website built with **Next.js 16** (App R
 | **Tailwind CSS v4**       | Utility-first styling via `@theme inline` design tokens |
 | **Framer Motion 12.42**   | Animations, scroll-driven parallax, staggered reveals   |
 | **TypeScript**            | Type safety across the entire codebase                  |
+| **Sanity CMS**            | Headless content management (schemas, GROQ queries)     |
+| **next-sanity**           | Sanity client + toolkit for Next.js                     |
+| **@portabletext/react**   | Render rich text (Portable Text) content                |
 | **clsx + tailwind-merge** | Conditional class composition (`cn()` utility)          |
 
 **Fonts:** Playfair Display (headings) · Inter (body) — loaded via `next/font/google`.
@@ -61,23 +66,28 @@ A premium luxury interior design studio website built with **Next.js 16** (App R
 src/
 ├── app/                    # Next.js App Router pages
 │   ├── layout.tsx          # Root layout (fonts, metadata, SEO)
-│   ├── page.tsx            # Home page (assembles all sections)
+│   ├── page.tsx            # Home page (async, fetches all Sanity data)
 │   ├── not-found.tsx       # Custom 404 page
 │   ├── globals.css         # Tailwind v4 @theme design tokens
 │   ├── loading.tsx         # Suspense fallback
 │   └── error.tsx           # Error boundary
 │
+├── sanity/                 # Sanity CMS integration
+│   ├── client.ts           # Sanity client config
+│   ├── queries.ts          # GROQ queries with defineQuery
+│   ├── types.ts            # TypeScript interfaces for all documents
+│   └── image.ts            # urlFor() image URL builder
+│
 ├── components/
 │   ├── common/             # Reusable UI: Button, Container, Logo, etc.
 │   ├── layout/             # Navbar, MobileMenu, Footer
-│   └── sections/           # 15 thin orchestrator components
+│   └── sections/           # Section components receiving Sanity data as props
 │
 ├── features/               # Domain-driven feature modules
-│   ├── projects/           # ProjectCard, ProjectFilter, data, types
-│   ├── testimonials/       # TestimonialCard, data, types
+│   ├── projects/           # ProjectCard, ProjectFilter
+│   ├── testimonials/       # TestimonialCard
 │   ├── contact/            # ContactForm, validation, useContactForm
-│   ├── before-after/       # ComparisonSlider, data, types
-│   └── process/            # ProcessTimeline, data, types
+│   └── before-after/       # ComparisonSlider
 │
 ├── hooks/                  # Shared hooks
 │   ├── useActiveSection.ts # IntersectionObserver nav highlighting
@@ -85,14 +95,29 @@ src/
 │   ├── useMediaQuery.ts    # Responsive breakpoint detection
 │   └── useScroll.ts        # Scroll position tracking
 │
-└── lib/                    # Utilities and configuration
-    ├── constants.ts        # Site config, contact info, nav links
-    ├── animations.ts       # Centralized Framer Motion variants
-    ├── utils.ts            # cn() class merge utility
-    └── seo.ts              # SEO helper functions
+├── lib/                    # Utilities and configuration
+│   ├── constants.ts        # Site config, contact info, nav links
+│   ├── animations.ts       # Centralized Framer Motion variants
+│   ├── utils.ts            # cn() class merge utility
+│   └── seo.ts              # SEO helper functions
+│
+└── assets/                 # Static assets (icons, images, logos)
 ```
 
 ## Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- A `.env.local` file with your Sanity credentials (copy from `.env.example` if available):
+
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2024-01-01
+```
+
+### Commands
 
 ```bash
 # Install dependencies
@@ -115,9 +140,11 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 
 ## Architecture Notes
 
-- **Domain-driven features** — Each feature module (projects, testimonials, contact, etc.) is self-contained with its own types, data, components, and hooks under `src/features/`.
-- **Section components are thin orchestrators** — They live in `src/components/sections/` and compose feature components with layout and animation wrappers.
+- **Sanity CMS headless backend** — All content (hero, about, stats, services, projects, testimonials, before/after, gallery, process steps, site settings) is managed in Sanity and fetched via GROQ queries at build time. The home page (`page.tsx`) is an async server component that fetches all 10 document types in parallel.
+- **Domain-driven features** — Each feature module (projects, testimonials, contact, etc.) is self-contained with its own components and hooks under `src/features/`. Static data files were migrated to Sanity and removed.
+- **Section components are thin orchestrators** — They live in `src/components/sections/`, receive typed Sanity data as props, and compose feature components with layout and animation wrappers.
 - **Centralized animations** — All Framer Motion variants are defined in `src/lib/animations.ts` to maintain consistent motion design.
 - **Design tokens in Tailwind v4** — The `@theme inline` directive in `globals.css` defines custom colors, fonts, and spacing, accessible via Tailwind utility classes.
 - **Active navigation** — The `useActiveSection` hook uses IntersectionObserver with a middle-of-viewport threshold to highlight the current section in the navbar.
-- **Static generation ready** — The site is compatible with Next.js static export for deployment on any static hosting provider.
+- **Image optimization** — Sanity images are served via `@sanity/image-url` with automatic CDN delivery, LQIP placeholders, and responsive dimensions.
+- **Content management** — Editors can update all site content through [Sanity Studio](https://velora-interiors-cms.sanity.studio/) without code changes.

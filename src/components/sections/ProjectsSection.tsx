@@ -4,11 +4,15 @@ import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { ProjectCard } from "@/features/projects/components/ProjectCard";
 import { ProjectFilter } from "@/features/projects/components/ProjectFilter";
-import { projects } from "@/features/projects/data";
+import type { ProjectData } from "@/sanity/types";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-export function ProjectsSection() {
+interface ProjectsSectionProps {
+  projects: ProjectData[];
+}
+
+export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [activeCategory, setActiveCategory] = useState("all");
 
   const filteredProjects =
@@ -36,7 +40,7 @@ export function ProjectsSection() {
             className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
           >
             {filteredProjects.map((project, index) => (
-              <ProjectCard key={project.id} project={project} index={index} />
+              <ProjectCard key={project._id} project={project} index={index} />
             ))}
           </div>
         </AnimatePresence>

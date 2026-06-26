@@ -1,11 +1,11 @@
 "use client";
 
+import type { ProjectData } from "@/sanity/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import type { Project } from "../types";
 
 interface ProjectCardProps {
-  project: Project;
+  project: ProjectData;
   index: number;
 }
 
@@ -20,13 +20,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       className="group relative overflow-hidden bg-background-alt"
     >
       <div className="relative aspect-4/3 overflow-hidden">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-        />
+        {project.image?.asset?.url && (
+          <Image
+            src={project.image.asset.url}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          />
+        )}
         {/* Overlay on hover */}
         <div className="absolute inset-0 flex items-end bg-linear-to-t from-dark/70 via-dark/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100">
           <div className="p-6">
@@ -54,7 +56,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
           {project.title}
         </h3>
         <div className="mt-2 flex flex-wrap gap-2">
-          {project.tags.slice(0, 3).map((tag) => (
+          {project.tags?.slice(0, 3).map((tag: string) => (
             <span key={tag} className="font-body text-xs text-text-secondary">
               {tag}
             </span>

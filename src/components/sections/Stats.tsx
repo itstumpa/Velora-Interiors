@@ -3,26 +3,22 @@
 import { Container } from "@/components/common/Container";
 import { useCountUp } from "@/hooks/useCountUp";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import type { StatData } from "@/sanity/types";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
-const statsData = [
-  { value: 15, suffix: "+", label: "Years Experience" },
-  { value: 200, suffix: "+", label: "Projects Completed" },
-  { value: 50, suffix: "+", label: "Design Awards" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
-];
+interface StatsProps {
+  stats: StatData[];
+}
 
 function StatCard({
   value,
   suffix,
   label,
-  index,
 }: {
   value: number;
   suffix: string;
   label: string;
-  index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -41,7 +37,7 @@ function StatCard({
   );
 }
 
-export function Stats() {
+export function Stats({ stats }: StatsProps) {
   return (
     <section className="bg-dark py-16 md:py-20">
       <Container>
@@ -52,8 +48,13 @@ export function Stats() {
           viewport={{ once: true, amount: 0.3 }}
           className="grid grid-cols-2 gap-10 md:grid-cols-4 md:gap-8"
         >
-          {statsData.map((stat, index) => (
-            <StatCard key={stat.label} {...stat} index={index} />
+          {stats.map((stat) => (
+            <StatCard
+              key={stat._id}
+              value={stat.value}
+              suffix={stat.suffix || ""}
+              label={stat.label}
+            />
           ))}
         </motion.div>
       </Container>

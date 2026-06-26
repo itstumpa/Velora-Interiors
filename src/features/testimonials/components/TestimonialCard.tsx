@@ -1,11 +1,11 @@
 "use client";
 
+import type { TestimonialData } from "@/sanity/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import type { Testimonial } from "../types";
 
 interface TestimonialCardProps {
-  testimonial: Testimonial;
+  testimonial: TestimonialData;
   index: number;
 }
 
@@ -44,15 +44,17 @@ export function TestimonialCard({ testimonial, index }: TestimonialCardProps) {
 
       {/* Author */}
       <div className="mt-6 flex items-center gap-4">
-        <div className="relative h-14 w-14 overflow-full overflow-hidden">
-          <Image
-            src={testimonial.avatar}
-            alt={testimonial.name}
-            fill
-            className="object-cover"
-            sizes="56px"
-          />
-        </div>
+        {testimonial.avatar?.asset?.url && (
+          <div className="relative h-14 w-14 overflow-hidden">
+            <Image
+              src={testimonial.avatar.asset.url}
+              alt={testimonial.name}
+              fill
+              className="object-cover"
+              sizes="56px"
+            />
+          </div>
+        )}
         <div>
           <cite className="not-italic font-heading text-base font-semibold text-dark">
             {testimonial.name}

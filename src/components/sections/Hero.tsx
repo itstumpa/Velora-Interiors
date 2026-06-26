@@ -3,12 +3,17 @@
 import { Button } from "@/components/common/Button";
 import { Container } from "@/components/common/Container";
 import { heroChild, heroContainer } from "@/lib/animations";
+import type { HeroData } from "@/sanity/types";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
-export function Hero() {
+interface HeroProps {
+  hero: HeroData;
+}
+
+export function Hero({ hero }: HeroProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -31,14 +36,16 @@ export function Hero() {
         style={{ y: parallaxY, scale: imageScale }}
       >
         <div className="relative h-[120%] w-full">
-          <Image
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85&auto=format"
-            alt="Luxury interior design masterpiece"
-            fill
-            className="object-cover"
-            sizes="100vw"
-            priority
-          />
+          {hero.backgroundImage?.asset?.url && (
+            <Image
+              src={hero.backgroundImage.asset.url}
+              alt={hero.backgroundImage?.alt || "Hero background"}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+          )}
         </div>
       </motion.div>
 
@@ -75,9 +82,9 @@ export function Hero() {
             variants={heroChild}
             className="font-heading text-6xl font-bold leading-[1.05] tracking-tight text-text-light md:text-7xl lg:text-8xl"
           >
-            DESIGNING
+            {hero.heading}
             <br />
-            <span className="text-primary">LUXURY</span>
+            <span className="text-primary">{hero.highlightedWord}</span>
             <br />
             SPACES
           </motion.h1>
@@ -87,20 +94,18 @@ export function Hero() {
             variants={heroChild}
             className="mt-8 max-w-lg text-base font-light leading-relaxed text-text-light/70 md:text-lg"
           >
-            We craft bespoke residential and commercial environments that
-            redefine elegance — every texture, every shadow, every detail
-            meticulously considered.
+            {hero.subtitle}
           </motion.p>
 
           {/* CTA */}
           <motion.div variants={heroChild} className="mt-10">
-            <Link href="/#contact">
+            <Link href={hero.ctaLink || "/#contact"}>
               <Button
                 variant="outline"
                 size="lg"
                 className="uppercase tracking-[0.25em] text-text-light backdrop-blur-sm hover:bg-primary hover:text-dark"
               >
-                Begin Your Journey
+                {hero.ctaText || "Begin Your Journey"}
               </Button>
             </Link>
           </motion.div>

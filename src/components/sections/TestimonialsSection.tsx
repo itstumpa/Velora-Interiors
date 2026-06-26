@@ -3,15 +3,25 @@
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { TestimonialCard } from "@/features/testimonials/components/TestimonialCard";
-import { testimonials } from "@/features/testimonials/data";
 import { cn } from "@/lib/utils";
+import type { TestimonialData } from "@/sanity/types";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+interface TestimonialsSectionProps {
+  testimonials: TestimonialData[];
+}
 
 const CARDS_PER_PAGE = 3;
-const totalPages = Math.ceil(testimonials.length / CARDS_PER_PAGE);
 
-export function TestimonialsSection() {
+export function TestimonialsSection({
+  testimonials,
+}: TestimonialsSectionProps) {
+  const totalPages = useMemo(
+    () => Math.ceil(testimonials.length / CARDS_PER_PAGE),
+    [testimonials.length],
+  );
+
   const [page, setPage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval>>(undefined);
@@ -21,11 +31,11 @@ export function TestimonialsSection() {
 
   const goNext = useCallback(
     () => setPage((p) => (p + 1 >= totalPages ? 0 : p + 1)),
-    [],
+    [totalPages],
   );
   const goPrev = useCallback(
     () => setPage((p) => (p - 1 < 0 ? totalPages - 1 : p - 1)),
-    [],
+    [totalPages],
   );
 
   // Auto-play: slides right to left every 4s
@@ -72,7 +82,7 @@ export function TestimonialsSection() {
               >
                 {visible.map((testimonial, index) => (
                   <TestimonialCard
-                    key={testimonial.id}
+                    key={testimonial._id}
                     testimonial={testimonial}
                     index={index}
                   />

@@ -2,12 +2,17 @@
 
 import { Button } from "@/components/common/Button";
 import { Container } from "@/components/common/Container";
+import type { SiteSettingsData } from "@/sanity/types";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 
-export function CTA() {
+interface CTAProps {
+  cta: SiteSettingsData;
+}
+
+export function CTA({ cta }: CTAProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -25,13 +30,15 @@ export function CTA() {
       {/* Parallax Background Image */}
       <motion.div className="absolute inset-0" style={{ y: parallaxY }}>
         <div className="relative h-[140%] w-full">
-          <Image
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1920&q=85&auto=format"
-            alt=""
-            fill
-            className="object-cover"
-            sizes="100vw"
-          />
+          {cta.ctaBackgroundImage?.asset?.url && (
+            <Image
+              src={cta.ctaBackgroundImage.asset.url}
+              alt=""
+              fill
+              className="object-cover"
+              sizes="100vw"
+            />
+          )}
         </div>
       </motion.div>
 
@@ -54,12 +61,10 @@ export function CTA() {
             className="max-w-xl"
           >
             <span className="mb-2 inline-block font-body text-[10px] font-light uppercase tracking-[0.35em] text-primary">
-              Let&apos;s Create Together
+              {cta.ctaSubtitle || "Let&apos;s Create Together"}
             </span>
             <h2 className="font-heading text-3xl font-bold leading-[1.15] tracking-tight text-text-light md:text-4xl lg:text-5xl">
-              Ready to Transform
-              <br />
-              <span className="text-primary">Your Space?</span>
+              {cta.ctaHeading || "Ready to Transform Your Space?"}
             </h2>
           </motion.div>
 
@@ -75,18 +80,18 @@ export function CTA() {
             }}
             className="flex shrink-0 flex-col gap-3 sm:flex-row"
           >
-            <Link href="/#contact">
+            <Link href={cta.ctaPrimaryButtonLink || "/#contact"}>
               <Button size="md" className="uppercase tracking-[0.25em]">
-                Book a Consultation
+                {cta.ctaPrimaryButtonText || "Book a Consultation"}
               </Button>
             </Link>
-            <Link href="/#projects">
+            <Link href={cta.ctaSecondaryButtonLink || "/#projects"}>
               <Button
                 variant="outline"
                 size="md"
                 className="border-text-light/20 uppercase tracking-[0.25em] text-text-light/80 hover:border-text-light/40 hover:bg-transparent hover:text-text-light"
               >
-                View Portfolio
+                {cta.ctaSecondaryButtonText || "View Portfolio"}
               </Button>
             </Link>
           </motion.div>

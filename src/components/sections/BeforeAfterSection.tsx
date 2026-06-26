@@ -3,9 +3,13 @@
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { ComparisonSlider } from "@/features/before-after/components/ComparisonSlider";
-import { beforeAfterProjects } from "@/features/before-after/data";
+import type { BeforeAfterData } from "@/sanity/types";
 
-export function BeforeAfterSection() {
+interface BeforeAfterSectionProps {
+  beforeAfter: BeforeAfterData[];
+}
+
+export function BeforeAfterSection({ beforeAfter }: BeforeAfterSectionProps) {
   return (
     <section id="before-after" className="bg-background py-14 md:py-18">
       <Container>
@@ -16,9 +20,9 @@ export function BeforeAfterSection() {
         />
 
         <div className="mt-12 grid gap-12 md:mt-16 lg:grid-cols-2 lg:gap-16 xl:grid-cols-3">
-          {beforeAfterProjects.map((project, index) => (
+          {beforeAfter.map((project, index) => (
             <ComparisonSlider
-              key={project.id}
+              key={project._id}
               project={project}
               index={index}
             />

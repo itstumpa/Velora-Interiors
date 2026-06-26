@@ -2,7 +2,14 @@
 
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { projectCategories } from "../data";
+
+const projectCategories = [
+  { value: "all", label: "All Projects" },
+  { value: "residential", label: "Residential" },
+  { value: "commercial", label: "Commercial" },
+  { value: "hospitality", label: "Hospitality" },
+  { value: "retail", label: "Retail" },
+] as const;
 
 interface ProjectFilterProps {
   activeCategory: string;

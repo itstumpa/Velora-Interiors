@@ -45,18 +45,14 @@ export function useContactForm() {
     setStatus("submitting");
 
     try {
-      // Simulate API call — replace with actual endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-      // If webhook URL configured, POST to it
-      const webhookUrl = process.env.NEXT_PUBLIC_CONTACT_WEBHOOK_URL;
-      if (webhookUrl) {
-        const response = await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
-        });
-        if (!response.ok) throw new Error("Failed to send message");
+      if (!response.ok) {
+        throw new Error("Failed to send message");
       }
 
       setStatus("success");

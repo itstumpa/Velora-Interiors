@@ -3,46 +3,12 @@
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
+import type { ServiceData } from "@/sanity/types";
 import { motion } from "framer-motion";
 
-const services = [
-  {
-    title: "Residential Design",
-    description:
-      "Full-service interior design for homes, apartments, and penthouses — from concept to completion.",
-    icon: "home",
-  },
-  {
-    title: "Commercial Design",
-    description:
-      "Strategic workplace and commercial environments that enhance productivity, brand identity, and well-being.",
-    icon: "briefcase",
-  },
-  {
-    title: "Hospitality Design",
-    description:
-      "Captivating hotel, restaurant, and resort interiors that create memorable guest experiences.",
-    icon: "star",
-  },
-  {
-    title: "Retail Design",
-    description:
-      "Immersive retail environments that tell your brand story and drive customer engagement.",
-    icon: "shopping-bag",
-  },
-  {
-    title: "Space Planning",
-    description:
-      "Optimized spatial layouts that maximize functionality, flow, and natural light.",
-    icon: "layout",
-  },
-  {
-    title: "Custom Furniture",
-    description:
-      "Bespoke furniture and millwork designed exclusively for your space and lifestyle.",
-    icon: "edit",
-  },
-];
+interface ServicesProps {
+  services: ServiceData[];
+}
 
 const serviceIcons: Record<string, React.ReactNode> = {
   home: (
@@ -137,7 +103,7 @@ const serviceIcons: Record<string, React.ReactNode> = {
   ),
 };
 
-export function Services() {
+export function Services({ services }: ServicesProps) {
   return (
     <section id="services" className="bg-background py-14 md:py-18">
       <Container>
@@ -156,7 +122,7 @@ export function Services() {
         >
           {services.map((service) => (
             <motion.div
-              key={service.title}
+              key={service._id}
               variants={fadeInUp}
               className="group border border-border bg-white p-8 transition-shadow hover:shadow-lg"
             >

@@ -1,13 +1,13 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import type { BeforeAfterData } from "@/sanity/types";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";
-import type { BeforeAfterProject } from "../types";
 
 interface ComparisonSliderProps {
-  project: BeforeAfterProject;
+  project: BeforeAfterData;
   index: number;
 }
 
@@ -61,26 +61,30 @@ export function ComparisonSlider({ project, index }: ComparisonSliderProps) {
         }}
       >
         {/* After image (full) */}
-        <Image
-          src={project.afterImage}
-          alt={`${project.title} - After`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
+        {project.afterImage?.asset?.url && (
+          <Image
+            src={project.afterImage.asset.url}
+            alt={`${project.title} - After`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        )}
 
         {/* Before image (clipped) */}
         <div
           className="absolute inset-0 overflow-hidden"
           style={{ width: `${position}%` }}
         >
-          <Image
-            src={project.beforeImage}
-            alt={`${project.title} - Before`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
+          {project.beforeImage?.asset?.url && (
+            <Image
+              src={project.beforeImage.asset.url}
+              alt={`${project.title} - Before`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          )}
         </div>
 
         {/* Slider Handle */}

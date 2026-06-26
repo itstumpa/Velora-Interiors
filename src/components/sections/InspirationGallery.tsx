@@ -2,11 +2,12 @@
 
 import { Container } from "@/components/common/Container";
 import { SectionTitle } from "@/components/common/SectionTitle";
+import type { GalleryImageData } from "@/sanity/types";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
-// Gallery categories
+// Gallery categories (static UI constants matching schema dropdown)
 const categories = [
   { value: "all", label: "All" },
   { value: "living", label: "Living" },
@@ -15,65 +16,22 @@ const categories = [
   { value: "bathroom", label: "Bathroom" },
 ];
 
-const galleryImages = [
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80&auto=format",
-    alt: "Elegant living room with neutral tones",
-    category: "living",
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&q=80&auto=format",
-    alt: "Luxury bedroom with soft lighting",
-    category: "bedroom",
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1573855619003-97b4799dcd8b?w=600&q=80&auto=format",
-    alt: "Modern kitchen with marble surfaces",
-    category: "kitchen",
-  },
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=80&auto=format",
-    alt: "Spa-inspired bathroom design",
-    category: "bathroom",
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80&auto=format",
-    alt: "Open concept living space",
-    category: "living",
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600&q=80&auto=format",
-    alt: "Master bedroom with elegant decor",
-    category: "bedroom",
-  },
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=80&auto=format",
-    alt: "Contemporary kitchen design",
-    category: "kitchen",
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80&auto=format",
-    alt: "Luxury bathroom with marble finishes",
-    category: "bathroom",
-  },
-];
+interface InspirationGalleryProps {
+  gallery: GalleryImageData[];
+}
 
-export function InspirationGallery() {
+export function InspirationGallery({ gallery }: InspirationGalleryProps) {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const filtered =
     activeCategory === "all"
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === activeCategory);
+      ? gallery
+      : gallery.filter((img) => img.category === activeCategory);
+
+  const selectedImageData = selectedImage
+    ? gallery.find((img) => img._id === selectedImage)
+    : null;
 
   return (
     <section id="gallery" className="bg-background-alt py-14 md:py-18">
@@ -106,22 +64,24 @@ export function InspirationGallery() {
           <AnimatePresence mode="popLayout">
             {filtered.map((img) => (
               <motion.div
-                key={img.id}
+                key={img._id}
                 layout
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 className="group relative aspect-square cursor-pointer overflow-hidden"
-                onClick={() => setSelectedImage(img.id)}
+                onClick={() => setSelectedImage(img._id)}
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
+                {img.image?.asset?.url && (
+                  <Image
+                    src={img.image.asset.url}
+                    alt={img.altText || "Gallery image"}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                )}
                 <div className="absolute inset-0 flex items-center justify-center bg-dark/0 transition-colors duration-300 group-hover:bg-dark/40">
                   <span className="translate-y-4 font-body text-sm font-medium text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
                     View
@@ -135,7 +95,7 @@ export function InspirationGallery() {
 
       {/* Lightbox */}
       <AnimatePresence>
-        {selectedImage !== null && (
+        {selectedImageData && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -151,21 +111,15 @@ export function InspirationGallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative aspect-4/3 w-full">
-                {selectedImage !== null &&
-                  (() => {
-                    const img = galleryImages.find(
-                      (g) => g.id === selectedImage,
-                    );
-                    return img ? (
-                      <Image
-                        src={img.src}
-                        alt={img.alt}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 80vw"
-                      />
-                    ) : null;
-                  })()}
+                {selectedImageData.image?.asset?.url && (
+                  <Image
+                    src={selectedImageData.image.asset.url}
+                    alt={selectedImageData.altText || "Gallery image"}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 80vw"
+                  />
+                )}
               </div>
               <button
                 onClick={() => setSelectedImage(null)}
