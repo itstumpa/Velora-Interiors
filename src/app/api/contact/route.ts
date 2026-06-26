@@ -14,19 +14,25 @@ export async function POST(request: Request) {
       );
     }
 
+    const emailHost = (process.env.EMAIL_HOST || "smtp.gmail.com").trim();
+    const emailUser = (process.env.EMAIL_USER || "").trim();
+    const emailPass = (process.env.EMAIL_PASS || "").trim();
+    const emailFrom = (process.env.EMAIL_FROM || "Velora Interiors").trim();
+    const emailPort = Number(process.env.EMAIL_PORT) || 587;
+
     const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST || "smtp.gmail.com",
-      port: Number(process.env.EMAIL_PORT) || 587,
+      host: emailHost,
+      port: emailPort,
       secure: false,
       auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+        user: emailUser,
+        pass: emailPass,
       },
     });
 
     const mailOptions = {
-      from: `"${process.env.EMAIL_FROM || "Velora Interiors"}" <${process.env.EMAIL_USER}>`,
-      to: process.env.EMAIL_USER, // Send to yourself
+      from: `"${emailFrom}" <${emailUser}>`,
+      to: emailUser, // Send to yourself
       replyTo: email,
       subject: `New Inquiry from ${name} — Velora Interiors`,
       html: `
